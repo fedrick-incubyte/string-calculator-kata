@@ -13,21 +13,21 @@ class StringCalculator:
         return sum(n for n in nums if n <= 1000)
 
     def _parse_numbers(self, numbers: str) -> list[int]:
+        delimiters = [",", "\n"]
+        
         if numbers.startswith("//"):
             header, numbers = numbers.split("\n", 1)
-            if header.startswith("//[") and header.endswith("]"):
-                delimiters = header[3:-1].split("][")
-                for d in delimiters:
-                    numbers = numbers.replace(d, ",")
-                delimiter = ","
-            else:
-                delimiter = header[2]
-            numbers = numbers.replace("\n", delimiter)
-        else:
-            delimiter = ","
-            numbers = numbers.replace("\n", ",")
+            delimiters = self._get_delimiters(header) + ["\n"]
         
-        return [int(n) for n in numbers.split(delimiter) if n.strip()]
+        for d in delimiters:
+            numbers = numbers.replace(d, ",")
+            
+        return [int(n) for n in numbers.split(",") if n.strip()]
+
+    def _get_delimiters(self, header: str) -> list[str]:
+        if header.startswith("//[") and header.endswith("]"):
+            return header[3:-1].split("][")
+        return [header[2]]
 
     def _check_negatives(self, nums: list[int]):
         negatives = [n for n in nums if n < 0]
