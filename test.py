@@ -22,3 +22,10 @@ def test_add_multiple_negative_numbers():
     with pytest.raises(Exception) as excinfo:
         calculator.add("1,-2,-3")
     assert "negatives: -2, -3" in str(excinfo.value)
+
+def test_get_called_count():
+    calculator = StringCalculator()
+    assert calculator.get_called_count() == 0
+    calculator.add("1,2")
+    calculator.add("3,4")
+    assert calculator.get_called_count() == 2
