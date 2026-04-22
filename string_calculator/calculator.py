@@ -24,7 +24,7 @@ class StringCalculator:
         if negatives:
             raise Exception(f"negatives: {', '.join(map(str, negatives))}")
 
-        return sum(nums)
+        return sum(n for n in nums if n <= 1000)
 
     def get_called_count(self):
         return self._called_count
