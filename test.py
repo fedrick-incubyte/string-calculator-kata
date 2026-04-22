@@ -1,4 +1,6 @@
+import pytest
 from string_calculator.calculator import StringCalculator
+
 def test_add():
     calculator = StringCalculator()
     assert calculator.add("") == 0
@@ -8,3 +10,9 @@ def test_add():
     assert calculator.add("1\n2,3") == 6
     assert calculator.add("1\n") == 1
     assert calculator.add("//;\n1;2") == 3
+
+def test_add_negative_numbers():
+    calculator = StringCalculator()
+    with pytest.raises(Exception) as excinfo:
+        calculator.add("1,-2")
+    assert "negatives: -2" in str(excinfo.value)
