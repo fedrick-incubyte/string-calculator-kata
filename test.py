@@ -38,3 +38,7 @@ def test_add_any_length_delimiter():
 def test_add_multiple_delimiters():
     calculator = StringCalculator()
     assert calculator.add("//[*][%]\n1*2%3") == 6
+
+def test_add_multiple_long_delimiters():
+    calculator = StringCalculator()
+    assert calculator.add("//[**][%%]\n1**2%%3") == 6
