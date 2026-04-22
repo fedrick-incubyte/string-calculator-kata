@@ -7,3 +7,4 @@ def test_add():
     assert calculator.add("1,2,3") == 6
     assert calculator.add("1\n2,3") == 6
     assert calculator.add("1\n") == 1
+    assert calculator.add("//;\n1;2") == 3
