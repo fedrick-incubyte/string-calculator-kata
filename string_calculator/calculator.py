@@ -16,7 +16,10 @@ class StringCalculator:
         if numbers.startswith("//"):
             header, numbers = numbers.split("\n", 1)
             if header.startswith("//[") and header.endswith("]"):
-                delimiter = header[3:-1]
+                delimiters = header[3:-1].split("][")
+                for d in delimiters:
+                    numbers = numbers.replace(d, ",")
+                delimiter = ","
             else:
                 delimiter = header[2]
             numbers = numbers.replace("\n", delimiter)
