@@ -13,11 +13,15 @@ class StringCalculator:
         return sum(n for n in nums if n <= 1000)
 
     def _parse_numbers(self, numbers: str) -> list[int]:
-        delimiter = ","
         if numbers.startswith("//"):
             header, numbers = numbers.split("\n", 1)
-            delimiter = header[2]
+            if header.startswith("//[") and header.endswith("]"):
+                delimiter = header[3:-1]
+            else:
+                delimiter = header[2]
+            numbers = numbers.replace("\n", delimiter)
         else:
+            delimiter = ","
             numbers = numbers.replace("\n", ",")
         
         return [int(n) for n in numbers.split(delimiter) if n.strip()]
