@@ -3,4 +3,7 @@ class StringCalculator:
         if numbers == "":
             return 0
         else:
-            return sum(int(num) for num in numbers.replace("\n", ",").split(","))
+            return sum(
+                int(num) if num.isdigit() else 0
+                for num in numbers.replace("\n", ",").split(",")
+            )
