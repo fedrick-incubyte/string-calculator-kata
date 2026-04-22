@@ -1,5 +1,9 @@
 class StringCalculator:
+    def __init__(self):
+        self._called_count = 0
+
     def add(self, numbers: str):
+        self._called_count += 1
         if not numbers:
             return 0
 
@@ -21,4 +25,7 @@ class StringCalculator:
             raise Exception(f"negatives: {', '.join(map(str, negatives))}")
 
         return sum(nums)
+
+    def get_called_count(self):
+        return self._called_count
 
