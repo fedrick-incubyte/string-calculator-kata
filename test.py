@@ -34,3 +34,7 @@ def test_get_called_count():
 def test_add_any_length_delimiter():
     calculator = StringCalculator()
     assert calculator.add("//[***]\n1***2***3") == 6
+
+def test_add_multiple_delimiters():
+    calculator = StringCalculator()
+    assert calculator.add("//[*][%]\n1*2%3") == 6
