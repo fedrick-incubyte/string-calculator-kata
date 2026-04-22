@@ -30,3 +30,7 @@ def test_get_called_count():
     calculator.add("1,2")
     calculator.add("3,4")
     assert calculator.get_called_count() == 2
+
+def test_add_any_length_delimiter():
+    calculator = StringCalculator()
+    assert calculator.add("//[***]\n1***2***3") == 6
