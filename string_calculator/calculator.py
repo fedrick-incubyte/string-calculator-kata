@@ -7,8 +7,8 @@ class StringCalculator:
         if numbers.startswith("//"):
             header, numbers = numbers.split("\n", 1)
             delimiter = header[2]
-        else:
-            numbers = numbers.replace("\n", ",")
+        
+        numbers = numbers.replace("\n", delimiter)
 
         parts = numbers.split(delimiter)
         return sum(int(num) for num in parts if num.strip().isdigit())
