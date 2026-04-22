@@ -1,13 +1,14 @@
 class StringCalculator:
     def add(self, numbers: str):
-        if numbers == "":
+        if not numbers:
             return 0
-        
+
+        delimiter = ","
         if numbers.startswith("//"):
-            delimiter = numbers[2]
-            numbers = numbers.split("\n", 1)[1]
-            parts = numbers.split(delimiter)
+            header, numbers = numbers.split("\n", 1)
+            delimiter = header[2]
         else:
-            parts = numbers.replace("\n", ",").split(",")
-            
-        return sum(int(num) if num.isdigit() else 0 for num in parts)
+            numbers = numbers.replace("\n", ",")
+
+        parts = numbers.split(delimiter)
+        return sum(int(num) for num in parts if num.strip().isdigit())
