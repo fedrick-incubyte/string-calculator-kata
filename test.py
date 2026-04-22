@@ -3,4 +3,4 @@ def test_add():
     calculator = StringCalculator()
     assert calculator.add("") == 0
     assert calculator.add("1") == 1
-    
+    assert calculator.add("1,2") == 3
