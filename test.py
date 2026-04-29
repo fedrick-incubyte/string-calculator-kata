@@ -33,33 +33,33 @@ def should_ignore_numbers_greater_than_1000():
     calculator = StringCalculator()
     assert calculator.add("2,1001") == 2
 
-def test_add_negative_numbers():
+def should_raise_when_single_negative_number_provided():
     calculator = StringCalculator()
     with pytest.raises(Exception) as excinfo:
         calculator.add("1,-2")
     assert "negatives: -2" in str(excinfo.value)
 
-def test_add_multiple_negative_numbers():
+def should_report_all_negatives_in_exception_message():
     calculator = StringCalculator()
     with pytest.raises(Exception) as excinfo:
         calculator.add("1,-2,-3")
     assert "negatives: -2, -3" in str(excinfo.value)
 
-def test_get_called_count():
+def should_track_number_of_times_add_is_called():
     calculator = StringCalculator()
     assert calculator.get_called_count() == 0
     calculator.add("1,2")
     calculator.add("3,4")
     assert calculator.get_called_count() == 2
 
-def test_add_any_length_delimiter():
+def should_support_multi_char_delimiter_in_bracket_syntax():
     calculator = StringCalculator()
     assert calculator.add("//[***]\n1***2***3") == 6
 
-def test_add_multiple_delimiters():
+def should_support_multiple_single_char_delimiters():
     calculator = StringCalculator()
     assert calculator.add("//[*][%]\n1*2%3") == 6
 
-def test_add_multiple_long_delimiters():
+def should_support_multiple_multi_char_delimiters():
     calculator = StringCalculator()
     assert calculator.add("//[**][%%]\n1**2%%3") == 6
