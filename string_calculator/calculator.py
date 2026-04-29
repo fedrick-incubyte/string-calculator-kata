@@ -1,3 +1,6 @@
+MAXIMUM_ADDABLE_VALUE = 1000
+
+
 class NegativeNumberError(ValueError):
     pass
 
@@ -14,7 +17,7 @@ class StringCalculator:
         nums = self._parse_numbers(numbers)
         self._check_negatives(nums)
         
-        return sum(n for n in nums if n <= 1000)
+        return sum(n for n in nums if n <= MAXIMUM_ADDABLE_VALUE)
 
     def _parse_numbers(self, numbers: str) -> list[int]:
         delimiters = [",", "\n"]
