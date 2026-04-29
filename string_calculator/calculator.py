@@ -15,7 +15,7 @@ class StringCalculator:
             return 0
 
         nums = self._parse_numbers(numbers)
-        self._check_negatives(nums)
+        self._raise_if_negatives(nums)
         
         return sum(n for n in nums if n <= MAXIMUM_ADDABLE_VALUE)
 
@@ -36,7 +36,7 @@ class StringCalculator:
             return header[3:-1].split("][")
         return [header[2]]
 
-    def _check_negatives(self, nums: list[int]):
+    def _raise_if_negatives(self, nums: list[int]):
         negatives = [n for n in nums if n < 0]
         if negatives:
             raise NegativeNumberError(f"negatives: {', '.join(map(str, negatives))}")
