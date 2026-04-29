@@ -1,6 +1,7 @@
 import re
 
 MAXIMUM_ADDABLE_VALUE = 1000
+DEFAULT_DELIMITERS = [",", "\n"]
 
 
 class NegativeNumberError(ValueError):
@@ -22,7 +23,7 @@ class StringCalculator:
         return sum(n for n in nums if n <= MAXIMUM_ADDABLE_VALUE)
 
     def _parse_numbers(self, numbers: str) -> list[int]:
-        delimiters = [",", "\n"]
+        delimiters = list(DEFAULT_DELIMITERS)
         body = numbers
 
         if numbers.startswith("//"):
