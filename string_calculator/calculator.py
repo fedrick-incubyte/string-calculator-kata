@@ -1,3 +1,5 @@
+import re
+
 MAXIMUM_ADDABLE_VALUE = 1000
 
 
@@ -21,15 +23,15 @@ class StringCalculator:
 
     def _parse_numbers(self, numbers: str) -> list[int]:
         delimiters = [",", "\n"]
-        
+        body = numbers
+
         if numbers.startswith("//"):
-            header, numbers = numbers.split("\n", 1)
-            delimiters = self._get_delimiters(header) + ["\n"]
-        
-        for d in delimiters:
-            numbers = numbers.replace(d, ",")
-            
-        return [int(n) for n in numbers.split(",") if n.strip()]
+            delimiter_header, body = numbers.split("\n", 1)
+            delimiters = self._get_delimiters(delimiter_header) + ["\n"]
+
+        sorted_delimiters = sorted(delimiters, key=len, reverse=True)
+        pattern = "|".join(re.escape(delimiter) for delimiter in sorted_delimiters)
+        return [int(token) for token in re.split(pattern, body) if token.strip()]
 
     def _get_delimiters(self, header: str) -> list[str]:
         if header.startswith("//[") and header.endswith("]"):
