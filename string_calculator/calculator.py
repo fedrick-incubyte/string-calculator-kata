@@ -1,3 +1,7 @@
+class NegativeNumberError(ValueError):
+    pass
+
+
 class StringCalculator:
     def __init__(self):
         self._called_count = 0
@@ -32,7 +36,7 @@ class StringCalculator:
     def _check_negatives(self, nums: list[int]):
         negatives = [n for n in nums if n < 0]
         if negatives:
-            raise Exception(f"negatives: {', '.join(map(str, negatives))}")
+            raise NegativeNumberError(f"negatives: {', '.join(map(str, negatives))}")
 
     def get_called_count(self) -> int:
         return self._called_count

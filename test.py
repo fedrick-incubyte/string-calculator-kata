@@ -1,5 +1,5 @@
 import pytest
-from string_calculator.calculator import StringCalculator
+from string_calculator.calculator import StringCalculator, NegativeNumberError
 
 
 @pytest.fixture
@@ -31,15 +31,17 @@ def should_support_custom_single_char_delimiter(calculator):
 def should_ignore_numbers_greater_than_1000(calculator):
     assert calculator.add("2,1001") == 2
 
+def should_raise_negative_number_error_not_bare_exception(calculator):
+    with pytest.raises(NegativeNumberError):
+        calculator.add("-1")
+
 def should_raise_when_single_negative_number_provided(calculator):
-    with pytest.raises(Exception) as excinfo:
+    with pytest.raises(NegativeNumberError, match=r"negatives: -2"):
         calculator.add("1,-2")
-    assert "negatives: -2" in str(excinfo.value)
 
 def should_report_all_negatives_in_exception_message(calculator):
-    with pytest.raises(Exception) as excinfo:
+    with pytest.raises(NegativeNumberError, match=r"negatives: -2, -3"):
         calculator.add("1,-2,-3")
-    assert "negatives: -2, -3" in str(excinfo.value)
 
 def should_track_number_of_times_add_is_called():
     calculator = StringCalculator()
