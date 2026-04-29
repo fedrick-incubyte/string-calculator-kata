@@ -51,10 +51,10 @@ def should_report_all_negatives_in_exception_message(calculator):
 
 def should_track_number_of_times_add_is_called():
     calculator = StringCalculator()
-    assert calculator.get_called_count() == 0
+    assert calculator.called_count == 0
     calculator.add("1,2")
     calculator.add("3,4")
-    assert calculator.get_called_count() == 2
+    assert calculator.called_count == 2
 
 def should_support_multi_char_delimiter_in_bracket_syntax(calculator):
     assert calculator.add("//[***]\n1***2***3") == 6

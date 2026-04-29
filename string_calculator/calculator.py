@@ -44,5 +44,6 @@ class StringCalculator:
         if negatives:
             raise NegativeNumberError(f"negatives: {', '.join(map(str, negatives))}")
 
-    def get_called_count(self) -> int:
+    @property
+    def called_count(self) -> int:
         return self._called_count
