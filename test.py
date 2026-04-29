@@ -31,6 +31,12 @@ def should_support_custom_single_char_delimiter(calculator):
 def should_ignore_numbers_greater_than_1000(calculator):
     assert calculator.add("2,1001") == 2
 
+def should_include_number_exactly_equal_to_1000(calculator):
+    assert calculator.add("1000") == 1000
+
+def should_exclude_number_exactly_equal_to_1001(calculator):
+    assert calculator.add("1001") == 0
+
 def should_raise_negative_number_error_not_bare_exception(calculator):
     with pytest.raises(NegativeNumberError):
         calculator.add("-1")
