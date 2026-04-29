@@ -56,6 +56,25 @@ def should_track_number_of_times_add_is_called():
     calculator.add("3,4")
     assert calculator.called_count == 2
 
+def should_increment_count_on_empty_string_call():
+    calculator = StringCalculator()
+    calculator.add("")
+    assert calculator.called_count == 1
+
+def should_increment_count_even_when_exception_is_raised():
+    calculator = StringCalculator()
+    with pytest.raises(NegativeNumberError):
+        calculator.add("-1")
+    assert calculator.called_count == 1
+
+def should_maintain_independent_counts_per_instance():
+    first = StringCalculator()
+    second = StringCalculator()
+    first.add("1")
+    first.add("2")
+    assert first.called_count == 2
+    assert second.called_count == 0
+
 def should_support_multi_char_delimiter_in_bracket_syntax(calculator):
     assert calculator.add("//[***]\n1***2***3") == 6
 
